@@ -47,6 +47,11 @@
     <Compile Include="Cars\FourDoor.cs" />
     <Compile Include="Cars\NonExportedCar.cs" />
     <Compile Include="Cars\Transmission.cs" />
+    <Compile Include="Food\Carb.cs" />
+    <Compile Include="Food\Meal.cs" />
+    <Compile Include="Food\Protein.cs" />
+    <Compile Include="Food\Steak.cs" />
+    <Compile Include="Food\SweetPotato.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
