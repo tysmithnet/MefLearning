@@ -14,7 +14,7 @@ namespace ExtensibleLibrary
         public BodyType BodyType { get; set; }
 
         [Import]
-        public TransmissionType TransmissionType { get; set; }
+        public Transmission Transmission { get; set; }
     }
      
     public class NonExportedCar
@@ -23,7 +23,7 @@ namespace ExtensibleLibrary
         public BodyType BodyType { get; set; }
 
         [Import]
-        public TransmissionType TransmissionType { get; set; }
+        public Transmission Transmission { get; set; }
     }
 
     public class BodyType
@@ -37,13 +37,13 @@ namespace ExtensibleLibrary
         
     }
 
-    public class TransmissionType
+    public class Transmission
     {
         
     }
 
-    [Export(typeof(TransmissionType))]
-    public class Automatic : TransmissionType
+    [Export(typeof(Transmission))]
+    public class Automatic : Transmission
     {
 
     }

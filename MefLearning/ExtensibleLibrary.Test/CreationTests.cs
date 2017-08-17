@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition.Hosting;
+﻿using System;
+using System.ComponentModel.Composition.Hosting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.ComponentModel.Composition;
 
@@ -6,15 +7,7 @@ namespace ExtensibleLibrary.Test
 {
     [TestClass]
     public class CreationTests
-    {
-        public CompositionContainer CompositionContainer { get; set; }
-
-        [TestInitialize]
-        public void Initialize()
-        {
-            CompositionContainer = Utility.GetCompositionContainer();
-        }
-
+    {   
         [TestMethod]
         public void SatisfyImportsOnce_Does_Not_Require_Export_Attribute()
         {
@@ -22,11 +15,11 @@ namespace ExtensibleLibrary.Test
             NonExportedCar nonExportedCar = new NonExportedCar();
 
             // act
-            CompositionContainer.SatisfyImportsOnce(nonExportedCar);
+            Utility.CarContainer.SatisfyImportsOnce(nonExportedCar);
 
             // assert
             Assert.IsNotNull(nonExportedCar.BodyType);
-            Assert.IsNotNull(nonExportedCar.TransmissionType);
+            Assert.IsNotNull(nonExportedCar.Transmission);
         }
 
         [TestMethod]
@@ -36,7 +29,7 @@ namespace ExtensibleLibrary.Test
             // act
             // assert
             Assert.ThrowsException<ImportCardinalityMismatchException>(
-                () => CompositionContainer.GetExportedValue<NonExportedCar>());
+                () => Utility.CarContainer.GetExportedValue<NonExportedCar>());
         }
 
         [TestMethod]
@@ -46,12 +39,21 @@ namespace ExtensibleLibrary.Test
             NonExportedCar nonExportedCar = new NonExportedCar();
 
             // act
-            CompositionContainer.SatisfyImportsOnce(nonExportedCar);
-            CompositionContainer.SatisfyImportsOnce(nonExportedCar);
+            Utility.CarContainer.SatisfyImportsOnce(nonExportedCar);
+            Utility.CarContainer.SatisfyImportsOnce(nonExportedCar);
 
             // assert
             Assert.IsNotNull(nonExportedCar.BodyType);
-            Assert.IsNotNull(nonExportedCar.TransmissionType);
+            Assert.IsNotNull(nonExportedCar.Transmission);
+        }
+
+        [TestMethod]
+        public void Import_Requires_Single_Matching_Export()
+        {
+            // arrange
+            // act
+            // assert
+            Assert.ThrowsException<ImportCardinalityMismatchException>(() => Utility.CarContainer.GetExportedValue<Junk>());
         }
     }
 }
