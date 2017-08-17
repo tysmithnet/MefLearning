@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
+using ExtensibleLibrary.Cars;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExtensibleLibrary.Test

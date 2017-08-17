@@ -2,6 +2,7 @@
 using System.ComponentModel.Composition.Hosting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.ComponentModel.Composition;
+using ExtensibleLibrary.Cars;
 
 namespace ExtensibleLibrary.Test
 {
@@ -45,15 +46,6 @@ namespace ExtensibleLibrary.Test
             // assert
             Assert.IsNotNull(nonExportedCar.BodyType);
             Assert.IsNotNull(nonExportedCar.Transmission);
-        }
-
-        [TestMethod]
-        public void Import_Requires_Single_Matching_Export()
-        {
-            // arrange
-            // act
-            // assert
-            Assert.ThrowsException<ImportCardinalityMismatchException>(() => Utility.CarContainer.GetExportedValue<Junk>());
         }
     }
 }
