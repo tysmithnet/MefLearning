@@ -80,16 +80,17 @@ namespace ExtensibleLibrary.Test
         }
 
         [TestMethod]
-        public void New_Instances_Still_Have_Singleton_Components()
+        public void New_Instances_Have_Singleton_Components_Unless_They_Have_NonShared()
         {
             // arrange
             // act
             Meal meal1 = Utility.FoodContainer.GetExportedValue<Meal>();
             Meal meal2 = Utility.FoodContainer.GetExportedValue<Meal>();
 
-            // assert
-            Assert.AreSame(meal1.Protein, meal2.Protein);
+            // assert                                     
+            Assert.AreNotSame(meal1, meal2);
             Assert.AreSame(meal1.Carb, meal2.Carb);
+            Assert.AreNotSame(meal1.Protein, meal2.Protein);
         }
     }
 }
