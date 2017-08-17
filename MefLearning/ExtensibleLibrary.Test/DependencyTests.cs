@@ -13,9 +13,7 @@ namespace ExtensibleLibrary.Test
         [TestInitialize]
         public void Setup()
         {
-            AggregateCatalog aggregateCatalog = new AggregateCatalog();
-            aggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(Car).Assembly));
-            CompositionContainer = new CompositionContainer(aggregateCatalog);
+            CompositionContainer = Utility.GetCompositionContainer();
         }
 
         [TestMethod]
@@ -30,13 +28,6 @@ namespace ExtensibleLibrary.Test
             // assert
             Assert.IsNotNull(car.BodyType);
             Assert.IsNotNull(car.TransmissionType);
-        }
-
-        [TestMethod]
-        public void GetExportedValue_Requires_Export_Attribute()
-        {
-            Assert.ThrowsException<ImportCardinalityMismatchException>(
-                () => CompositionContainer.GetExportedValue<NonExportedCar>());
         }
     }
 }
