@@ -3,6 +3,7 @@ using System.ComponentModel.Composition.Hosting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.ComponentModel.Composition;
 using ExtensibleLibrary.Cars;
+using ExtensibleLibrary.Food;
 
 namespace ExtensibleLibrary.Test
 {
@@ -64,6 +65,31 @@ namespace ExtensibleLibrary.Test
             Assert.AreNotSame(nonExportedCar1, nonExportedCar2);
             Assert.AreSame(nonExportedCar1.BodyType, nonExportedCar2.BodyType);
             Assert.AreSame(nonExportedCar1.Transmission, nonExportedCar2.Transmission);
+        }
+
+        [TestMethod]
+        public void New_Instances_Can_Be_Created()
+        {
+            // arrange
+            // act
+            Meal meal1 = Utility.FoodContainer.GetExportedValue<Meal>();
+            Meal meal2 = Utility.FoodContainer.GetExportedValue<Meal>();
+
+            // assert
+            Assert.AreNotSame(meal1, meal2);
+        }
+
+        [TestMethod]
+        public void New_Instances_Still_Have_Singleton_Components()
+        {
+            // arrange
+            // act
+            Meal meal1 = Utility.FoodContainer.GetExportedValue<Meal>();
+            Meal meal2 = Utility.FoodContainer.GetExportedValue<Meal>();
+
+            // assert
+            Assert.AreSame(meal1.Protein, meal2.Protein);
+            Assert.AreSame(meal1.Carb, meal2.Carb);
         }
     }
 }

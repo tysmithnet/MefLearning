@@ -2,6 +2,8 @@
 
 namespace ExtensibleLibrary.Food
 {
+    [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class Meal
     {
         [Import]

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ExtensibleLibrary.Food
 {
-    [Export(typeof(Protein))]
+    [Export(typeof(Protein))]                    
     public class Steak : Protein
     {
 
