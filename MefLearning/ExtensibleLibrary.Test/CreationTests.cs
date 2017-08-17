@@ -47,5 +47,23 @@ namespace ExtensibleLibrary.Test
             Assert.IsNotNull(nonExportedCar.BodyType);
             Assert.IsNotNull(nonExportedCar.Transmission);
         }
+
+        [TestMethod]
+        public void Singletons_Are_Created_By_Default()
+        {
+            // arrange
+            // act
+            Car car1 = Utility.CarContainer.GetExportedValue<Car>();
+            Car car2 = Utility.CarContainer.GetExportedValue<Car>();
+
+            NonExportedCar nonExportedCar1 = new NonExportedCar();
+            NonExportedCar nonExportedCar2 = new NonExportedCar();
+                             
+            // assert
+            Assert.AreSame(car1, car2);
+            Assert.AreNotSame(nonExportedCar1, nonExportedCar2);
+            Assert.AreSame(nonExportedCar1.BodyType, nonExportedCar2.BodyType);
+            Assert.AreSame(nonExportedCar1.Transmission, nonExportedCar2.Transmission);
+        }
     }
 }
